@@ -3,20 +3,24 @@ import axios from "axios";
 
 export default function Chat() {
   const [userInput, setUserInput] = useState("");
-  const [msgs, setMsgs] = useState([]);
-  const inputref = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    inputref.current.focus();
+    inputRef.current.focus();
   }, []);
+
+  // create a new chat on the first render
   useEffect(() => {
     const createChat = async () => {
       try {
         const res = await axios.post("http://localhost:3000/api/chats");
         console.log(res.data);
-        //const newChat =
-      } catch (err) {
-        console.error(err);
+        setCurrentChat(res.data);
+      } catch (e) {
+        console.error(e);
       }
     };
     createChat();
@@ -28,46 +32,63 @@ export default function Chat() {
     setUserInput(text);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(`data: ${userInput}`);
-      const msg = {
+      console.log(`Data: ${userInput}`);
+
+      const message = {
         role: "user",
         content: userInput,
       };
-      setMsgs([...msgs, msg]);
+      console.log(`//////////******/////////////////////////`);
+      console.log(currentChat);
+      console.log(currentChat.newChat._id);
+      console.log(`//////////******/////////////////////////`);
+
+      // POST
+      const res = await axios.post(
+        `http://localhost:3000/api/chats/${currentChat.newChat._id}/message`,
+        message
+      );
+      console.log(res.data);
+
+      // setMessages([...messages, message]);
+      setMessages(res.data.messages);
+
       setUserInput("");
-      inputref.current.focus();
-    } catch (err) {
-      console.error(err);
+      // inputRef.current.focus();
+    } catch (e) {
+      console.error(e);
     }
   };
 
   return (
-    <main>
-      <h1>Chat</h1>
+    <div>
+      {/* MESSAGES  */}
       <div>
-        <div>
-          {msgs.map((m, i) => (
-            <div key={i}>
-              <p>{`${m.role.toUpperCase()}: ${m.content}`}</p>
-            </div>
-          ))}
-        </div>
-        <form onSubmit={handleSubmit} action="">
-          <label htmlFor="">
-            <input
-              type="text"
-              name="userInput"
-              value={userInput}
-              ref={inputref}
-              onChange={handleChange}
-            />
-          </label>
-          <button>Send</button>
-        </form>
+        {messages.map((m, i) => (
+          <div key={i}>
+            <p>{m.role}</p>
+            <p>{m.content}</p>
+          </div>
+        ))}
       </div>
-    </main>
+
+      {/* FORM */}
+      <form onSubmit={handleSubmit}>
+        <label>
+          <input
+            type="text"
+            name="userInput"
+            value={userInput}
+            ref={inputRef}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button>Send</button>
+      </form>
+    </div>
   );
 }
