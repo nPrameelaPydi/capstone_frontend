@@ -1,4 +1,4 @@
-export default function Recipe({ recipe }) {
+export default function Recipe({ recipe, onDelete }) {
   return (
     <div>
       <h2>{recipe.title}</h2>
@@ -6,6 +6,9 @@ export default function Recipe({ recipe }) {
       <p>{recipe.instructions}</p>
       <p>Created by: {recipe.createdBy}</p>
       <p>Created at: {new Date(recipe.createdAt).toLocaleString()}</p>
+
+      {/* Delete button */}
+      <button onClick={() => onDelete(recipe._id)}>Delete Recipe</button>
     </div>
   );
 }
