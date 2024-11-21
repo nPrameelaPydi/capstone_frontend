@@ -14,18 +14,20 @@ export default function RecipePage() {
     createdBy: "", // User ID or username provided by the user
   });
 
+  const [editingRecipe, setEditingRecipe] = useState(null); // State to track the recipe being edited
+
   // Handle input changes in the form and update the corresponding field in the newRecipe state
   const handleInputChange = (e) => {
-    const { name, value } = e.target; // Get the name of the field and its value
+    const { name, value } = e.target;
     setNewRecipe((prevState) => ({
-      ...prevState, // Preserve the existing fields
-      [name]: value, // Update the specific field
+      ...prevState,
+      [name]: value,
     }));
   };
 
   // Handle form submission to send a POST request to the backend
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+    e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:3000/api/recipes", // Backend API endpoint for creating a recipe
@@ -72,6 +74,43 @@ export default function RecipePage() {
     }
   };
 
+  // Handle editing: When "Edit" button is clicked, set the recipe to edit
+  const handleEdit = (recipe) => {
+    setEditingRecipe(recipe);
+    setNewRecipe({
+      title: recipe.title,
+      ingredients: recipe.ingredients,
+      instructions: recipe.instructions,
+      createdBy: recipe.createdBy,
+    });
+  };
+
+  // Handle recipe update via PATCH request
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/api/recipes/${editingRecipe._id}`,
+        newRecipe
+      );
+      // Update the recipes state with the updated recipe
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((recipe) =>
+          recipe._id === editingRecipe._id ? response.data : recipe
+        )
+      );
+      setEditingRecipe(null); // Close the edit form
+      setNewRecipe({
+        title: "",
+        ingredients: "",
+        instructions: "",
+        createdBy: "",
+      });
+    } catch (error) {
+      console.error("Error updating recipe:", error);
+    }
+  };
+
   return (
     <main>
       <h1>Recipe Page</h1>
@@ -104,13 +143,25 @@ export default function RecipePage() {
           onChange={handleInputChange}
           placeholder="Created By (user ID)" // Input for user ID
         />
-        <button type="submit">Add Recipe</button>
+        <button type="submit">
+          {editingRecipe ? "Update Recipe" : "Add Recipe"}
+        </button>
+        {editingRecipe && (
+          <button type="button" onClick={() => setEditingRecipe(null)}>
+            Cancel
+          </button>
+        )}
       </form>
 
       {/* Display the list of recipes */}
       <div>
         {recipes.map((recipe) => (
-          <Recipe key={recipe._id} recipe={recipe} onDelete={handleDelete} />
+          <Recipe
+            key={recipe._id}
+            recipe={recipe}
+            onDelete={handleDelete}
+            onEdit={() => handleEdit(recipe)}
+          />
         ))}
       </div>
     </main>
