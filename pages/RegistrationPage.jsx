@@ -28,6 +28,7 @@ const Register = () => {
       setMessage(response.data.message); //set success msg
     } catch (error) {
       console.error(error.response?.data || error.message);
+      //error.response?.data?.message: The ?. is called optional chaining. It ensures that if response or data is null or undefined, it won’t throw an error and will return undefined instead. This makes it safer to access properties that might not exist if something goes wrong with the request.
       setMessage(error.response?.data?.message || "Registration failed");
     }
   };
