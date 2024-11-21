@@ -1,0 +1,15 @@
+1. setMessage(response.data.message);
+This line is used to update the message state with the value of response.data.message. Here’s how it works:
+response: This is the object returned by the axios.post request. When the registration is successful, the backend sends a response, usually a JSON object, containing data and a message.
+response.data: In an Axios response, the data sent from the server is contained inside the data property of the response object.
+response.data.message: The backend can send a message to the frontend in the response body.
+
+setMessage(error.response?.data?.message || 'Registration failed');
+This line is used in case there is an error when making the POST request. 
+error.response: If the request fails (for example, due to invalid data or network issues), Axios throws an error. This error object contains a response property that holds the response from the server, which includes error details.
+
+error.response?.data?.message: The ?. is called optional chaining. It ensures that if response or data is null or undefined, it won’t throw an error and will return undefined instead. This makes it safer to access properties that might not exist if something goes wrong with the request.
+
+'Registration failed': This is a fallback message. If there's no message in error.response?.data, the code will use 'Registration failed' as the message.
+
+setMessage(error.response?.data?.message || 'Registration failed'): This updates the message state with either the error message from the server (error.response.data.message) or the fallback message ('Registration failed').
