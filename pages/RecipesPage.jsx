@@ -147,7 +147,18 @@ export default function RecipePage() {
           {editingRecipe ? "Update Recipe" : "Add Recipe"}
         </button>
         {editingRecipe && (
-          <button type="button" onClick={() => setEditingRecipe(null)}>
+          <button
+            type="button"
+            onClick={() => {
+              setEditingRecipe(null);
+              setNewRecipe({
+                title: "",
+                ingredients: "",
+                instructions: "",
+                createdBy: "",
+              });
+            }}
+          >
             Cancel
           </button>
         )}
