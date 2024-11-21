@@ -62,6 +62,12 @@ const Login = () => {
         </div>
         {/* submit button to trigger login route */}
         <button type="submit">Login</button>
+        {/* forgot password link */}
+        <div>
+          <p>
+            Forgot your password? <a href="/forgot-password">Reset it here</a>
+          </p>
+        </div>
       </form>
       {/* render msg if exists */}
       {message && <p>{message}</p>}

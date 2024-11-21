@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage.jsx";
-import NotFound from "../pages/NotfoundPage.jsx";
-import Nav from "../components/Nav.jsx";
-import RecipesPage from "../pages/RecipesPage.jsx";
-import ChatsPage from "../pages/ChatsPage";
-import Register from "../pages/RegistrationPage.jsx";
-import Login from "../pages/LoginPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import NotFound from "./pages/NotfoundPage.jsx";
+import Nav from "./components/Nav.jsx";
+import RecipesPage from "./pages/RecipesPage.jsx";
+import ChatsPage from "./pages/ChatsPage";
+import Register from "./pages/RegistrationPage.jsx";
+import Login from "./pages/LoginPage.jsx";
 
 export default function App() {
   return (
