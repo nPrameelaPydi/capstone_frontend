@@ -21,10 +21,13 @@ const Register = () => {
     try {
       //make a POST request to the backend to register the user
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register"
+        "http://localhost:3000/api/auth/register",
+        formData
       );
+      console.log(response.data); // Log success response
       setMessage(response.data.message); //set success msg
     } catch (error) {
+      console.error(error.response?.data || error.message);
       setMessage(error.response?.data?.message || "Registration failed");
     }
   };
