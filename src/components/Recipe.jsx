@@ -1,4 +1,5 @@
 export default function Recipe({ recipe, onDelete, onEdit }) {
+  console.log(recipe);
   return (
     <div>
       <h2>{recipe.title}</h2>
