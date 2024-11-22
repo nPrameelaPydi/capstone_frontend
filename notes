@@ -1,3 +1,13 @@
+const loggedInUserId = localStorage.getItem("userId");
+  if (loggedInUserId) {
+    console.log("Logged-in User ID:", loggedInUserId);
+    // Use this userId for API calls or user-specific actions
+  } else {
+    console.log("User not logged in");
+  }
+
+
+
 1. setMessage(response.data.message);
 This line is used to update the message state with the value of response.data.message. Here’s how it works:
 response: This is the object returned by the axios.post request. When the registration is successful, the backend sends a response, usually a JSON object, containing data and a message.

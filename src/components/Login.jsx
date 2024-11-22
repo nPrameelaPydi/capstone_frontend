@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ setLoggedInUserId }) => {
   //state to hold email and password entered by the user
   const [formData, setFormData] = useState({
     email: "", //initial value
@@ -19,18 +20,43 @@ const Login = () => {
     });
   };
 
+  //useNavigate hook is used to access the navigate function, which allows you to programmatically navigate to different routes in the application
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //send post req to backend with formData email and password
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
-        formData
+        formData,
+        { headers: { "Content-Type": "application/json" } }
       );
-      setMessage(response.data.message);
+      console.log("Response data:", response.data);
+
+      const { userId, name, message } = response.data || {};
+
+      if (!userId || !name) {
+        throw new Error("Invalid server response");
+      }
+
+      // Save user data to localStorage
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("userName", name);
+
+      // Update global user state
+      setLoggedInUserId(userId);
+
+      // navigate("/profile") to navigate to the profile page after a successful login
+      navigate("/profile");
+
+      // Display success message
+      setMessage(message || "Login successful");
     } catch (error) {
-      //optional chaining ensures that if response or data is null or undefined, it won’t throw an error and will return undefined instead
-      setMessage(error.response?.data?.message || "Login failed");
+      console.error("Error logging in:", error); // Log error in detail
+      const errorMessage = error.response
+        ? error.response.data.message
+        : "Login failed";
+      setMessage(errorMessage);
     }
   };
 
