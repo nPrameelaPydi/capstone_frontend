@@ -12,9 +12,12 @@ export default function RecipePage() {
     ingredients: "",
     instructions: "",
     createdBy: "", // User ID or username provided by the user
+    image: "",
   });
-
-  const [editingRecipe, setEditingRecipe] = useState(null); // State to track the recipe being edited
+  // State to track the recipe being edited
+  const [editingRecipe, setEditingRecipe] = useState(null);
+  // State for the uploaded image
+  const [image, setImage] = useState(null);
 
   // Handle input changes in the form and update the corresponding field in the newRecipe state
   const handleInputChange = (e) => {
@@ -25,13 +28,44 @@ export default function RecipePage() {
     }));
   };
 
+  const onInputChangeImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   // Handle form submission to send a POST request to the backend
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let imageUrl = "";
+
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+
+      try {
+        const imageResponse = await axios.post(
+          "http://localhost:3000/api/recipes/upload-image",
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        // If the image is successfully uploaded, assign the imageUrl
+        imageUrl = imageResponse.data.imageUrl;
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+
+    // Update newRecipe with the image URL if available
+    const recipeData = {
+      ...newRecipe,
+      image: imageUrl,
+    };
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/recipes", // Backend API endpoint for creating a recipe
-        newRecipe // Send the newRecipe object as the request body
+        recipeData, // Send the newRecipe object as the request body
+        { headers: { "Content-Type": "application/json" } }
       );
 
       // Add the newly created recipe to the recipes state
@@ -43,6 +77,7 @@ export default function RecipePage() {
         ingredients: "",
         instructions: "",
         createdBy: "",
+        image: "",
       });
     } catch (error) {
       console.error("Error creating recipe:", error); // Log any error that occurs
@@ -142,6 +177,11 @@ export default function RecipePage() {
           value={newRecipe.createdBy}
           onChange={handleInputChange}
           placeholder="Created By (user ID)" // Input for user ID
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onInputChangeImage} // Handle image upload
         />
         <button type="submit">
           {editingRecipe ? "Update Recipe" : "Add Recipe"}

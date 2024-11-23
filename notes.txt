@@ -23,3 +23,30 @@ error.response?.data?.message: The ?. is called optional chaining. It ensures th
 'Registration failed': This is a fallback message. If there's no message in error.response?.data, the code will use 'Registration failed' as the message.
 
 setMessage(error.response?.data?.message || 'Registration failed'): This updates the message state with either the error message from the server (error.response.data.message) or the fallback message ('Registration failed').
+
+
+const submitImage = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("image", image);
+
+  const result = await axios.post(
+    "http://localhost:3000/api/recipes/upload-image",
+    formData,
+    { headers: { "Content-Type": "multipart/form-data" } }
+  );
+};
+
+const [image, setImage] = useState(null);
+const onInputChange = (e) => {
+  console.log(e.target.files[0]);
+  setImage(e.target.files[0]);
+};
+
+<div>
+  <form onSubmit={submitImage} action="">
+  <input type="file" accept="image/*" onChange={onInputChange} />
+  <button type="submit">submit</button>
+  </form>
+</div>
