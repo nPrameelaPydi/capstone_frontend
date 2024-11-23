@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Recipe from "../components/Recipe.jsx";
 
@@ -18,6 +18,8 @@ export default function RecipePage() {
   const [editingRecipe, setEditingRecipe] = useState(null);
   // State for the uploaded image
   const [image, setImage] = useState(null);
+
+  const titleInputRef = useRef(null);
 
   // Handle input changes in the form and update the corresponding field in the newRecipe state
   const handleInputChange = (e) => {
@@ -116,31 +118,91 @@ export default function RecipePage() {
       title: recipe.title,
       ingredients: recipe.ingredients,
       instructions: recipe.instructions,
-      createdBy: recipe.createdBy,
+      createdBy: recipe.createdBy._id || recipe.createdBy,
+      image: recipe.image || "", //set an empty string if img not available
     });
+    titleInputRef.current.focus();
   };
+
+  //// Handle recipe update via PATCH request
+  //const handleUpdate = async (e) => {
+  //  e.preventDefault();
+  //  try {
+  //    const response = await axios.patch(
+  //      `http://localhost:3000/api/recipes/${editingRecipe._id}`,
+  //      newRecipe
+  //    );
+  //    // Update the recipes state with the updated recipe
+  //    setRecipes((prevRecipes) =>
+  //      prevRecipes.map((recipe) =>
+  //        recipe._id === editingRecipe._id ? response.data : recipe
+  //      )
+  //    );
+  //    setEditingRecipe(null); // Close the edit form
+  //    setNewRecipe({
+  //      title: "",
+  //      ingredients: "",
+  //      instructions: "",
+  //      createdBy: "",
+  //    });
+  //  } catch (error) {
+  //    console.error("Error updating recipe:", error);
+  //  }
+  //};
 
   // Handle recipe update via PATCH request
   const handleUpdate = async (e) => {
     e.preventDefault();
+
+    let imageUrl = editingRecipe.image; // Keep existing image if no new one is uploaded
+
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+      console.log("FormData contents:", [...formData.entries()]);
+
+      try {
+        const imageResponse = await axios.post(
+          "http://localhost:3000/api/recipes/upload-image",
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        imageUrl = imageResponse.data.imageUrl;
+      } catch (error) {
+        console.error("Error uploading image while editing recipe:", error);
+      }
+    }
+
+    //prepare updated recipe data
+    const updatedRecipe = {
+      ...newRecipe,
+      image: imageUrl, //include updated or existing image URL
+    };
+
     try {
       const response = await axios.patch(
         `http://localhost:3000/api/recipes/${editingRecipe._id}`,
-        newRecipe
+        updatedRecipe,
+        { headers: { "Content-Type": "application/json" } }
       );
+
       // Update the recipes state with the updated recipe
       setRecipes((prevRecipes) =>
         prevRecipes.map((recipe) =>
           recipe._id === editingRecipe._id ? response.data : recipe
         )
       );
+
+      //reset the form fields
       setEditingRecipe(null); // Close the edit form
       setNewRecipe({
         title: "",
         ingredients: "",
         instructions: "",
         createdBy: "",
+        image: "",
       });
+      setImage(null);
     } catch (error) {
       console.error("Error updating recipe:", error);
     }
@@ -150,8 +212,9 @@ export default function RecipePage() {
     <main>
       <h1>Recipe Page</h1>
       {/* Form for adding a new recipe */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={editingRecipe ? handleUpdate : handleSubmit}>
         <input
+          ref={titleInputRef}
           type="text"
           name="title"
           value={newRecipe.title}
