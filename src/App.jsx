@@ -8,6 +8,7 @@ import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import UserProfile from "./pages/UserProfilePage.jsx";
 import SingleRecipePage from "./pages/SingleRecipePage.jsx";
+import Footer from "./components/Footer.jsx";
 import "./App.css";
 
 import { useState, useEffect } from "react";
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="/chats" element={<ChatsPage />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 }

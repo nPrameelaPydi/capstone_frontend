@@ -48,6 +48,7 @@ export default function UserProfile({ userId }) {
                     {new Date(recipe.createdAt).toLocaleDateString()}
                   </small>
                 </p>
+                {recipe.image && <img src={recipe.image} alt="Recipe" />}
                 {/* button to delete recipe */}
                 <button>Delete</button>
               </li>

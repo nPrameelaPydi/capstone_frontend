@@ -183,10 +183,13 @@ export default function RecipePage() {
   };
 
   return (
-    <main>
-      <h1>Recipe Page</h1>
+    <main className="rpmain">
+      <h1 className="recipePageTitle">Recipe Page</h1>
       {/* Form for adding a new recipe */}
-      <form onSubmit={editingRecipe ? handleUpdate : handleSubmit}>
+      <form
+        className="recipePageForm"
+        onSubmit={editingRecipe ? handleUpdate : handleSubmit}
+      >
         <input
           ref={titleInputRef}
           type="text"
@@ -219,7 +222,6 @@ export default function RecipePage() {
           type="file"
           accept="image/*"
           onChange={onInputChangeImage} // Handle image upload
-          style={{ width: "400px", height: "250px" }}
         />
         <button type="submit">
           {editingRecipe ? "Update Recipe" : "Add Recipe"}
@@ -243,7 +245,7 @@ export default function RecipePage() {
       </form>
 
       {/* Display the list of recipes */}
-      <div>
+      <div className="recipe-list-container">
         {recipes.map((recipe) => (
           <Recipe
             key={recipe._id}
