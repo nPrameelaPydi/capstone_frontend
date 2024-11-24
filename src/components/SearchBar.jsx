@@ -37,7 +37,7 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSearch} action="">
+    <form className="searchbar" onSubmit={handleSearch} action="">
       <input
         type="text"
         value={title}

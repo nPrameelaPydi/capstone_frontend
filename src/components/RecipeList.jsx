@@ -2,7 +2,7 @@ export default function RecipeList({ recipes, onRecipeClick }) {
   // Ensure recipes is an array
   //  recipes = Array.isArray(recipes) ? recipes : [];
   return (
-    <div>
+    <div className="recipes-container">
       <h2>Recipes</h2>
       {recipes.length === 0 ? (
         <p>No recipes found</p>
