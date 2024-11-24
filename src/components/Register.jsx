@@ -37,53 +37,55 @@ const Register = () => {
     }
   };
   return (
-    <div>
-      <h2>Register</h2>
-      {/* the form where users input their data */}
-      <form onSubmit={handleSubmit} action="">
-        <div>
-          <label htmlFor="">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="">Password</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          ></input>
-          <label htmlFor="">
-            {/* toggle showPassword state */}
+    <div className="register-page">
+      <div className="register-container">
+        <h2>Register</h2>
+        {/* the form where users input their data */}
+        <form onSubmit={handleSubmit} action="">
+          <div>
+            <label htmlFor="">Name</label>
             <input
-              type="checkbox"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
-            />
-            Show Password
-          </label>
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      {/* display the message if it's not an empty string */}
-      {message && <p>{message}</p>}
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            ></input>
+            <label htmlFor="">
+              {/* toggle showPassword state */}
+              <input
+                type="checkbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
+              />
+              Show Password
+            </label>
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        {/* display the message if it's not an empty string */}
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 };
