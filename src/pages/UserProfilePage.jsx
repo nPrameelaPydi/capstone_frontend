@@ -23,37 +23,45 @@ export default function UserProfile({ userId }) {
 
   // JSX to render the user profile and their recipes
   return (
-    <div>
+    <div className="profile-page">
       {/* display user info only if user data is loaded */}
       {user && (
-        <div>
+        <div className="profile-container">
           <h1>{user.name}'s Profile</h1>
           <p>Email: {user.email}</p>
-          <h2>My Recipes</h2>
-          <ul>
-            {/* iterate thru the recipes array and render each recipe */}
-            {recipes.map((recipe) => (
-              <li key={recipe._id}>
-                <h3>{recipe.title}</h3>
-                {/*<p>{JSON.stringify(recipe)}</p>*/}
-                <p>
-                  <strong>Ingredients:</strong> {recipe.ingredients}
-                </p>
-                <p>
-                  <strong>Instructions:</strong> {recipe.instructions}
-                </p>
-                <p>
-                  <small>
-                    Created on:{" "}
-                    {new Date(recipe.createdAt).toLocaleDateString()}
-                  </small>
-                </p>
-                {recipe.image && <img src={recipe.image} alt="Recipe" />}
-                {/* button to delete recipe */}
-                <button>Delete</button>
-              </li>
-            ))}
-          </ul>
+          <div className="profile-recipes">
+            <h2>My Recipes</h2>
+            <ul>
+              {/* iterate thru the recipes array and render each recipe */}
+              {recipes.map((recipe) => (
+                <li key={recipe._id}>
+                  <h3>{recipe.title}</h3>
+                  {/*<p>{JSON.stringify(recipe)}</p>*/}
+                  <p>
+                    <strong>Ingredients:</strong> {recipe.ingredients}
+                  </p>
+                  <p>
+                    <strong>Instructions:</strong> {recipe.instructions}
+                  </p>
+                  <p>
+                    <small>
+                      Created on:{" "}
+                      {new Date(recipe.createdAt).toLocaleDateString()}
+                    </small>
+                  </p>
+                  {recipe.image && (
+                    <img
+                      className="up-recipe-img"
+                      src={recipe.image}
+                      alt="Recipe"
+                    />
+                  )}
+                  {/* button to delete recipe */}
+                  <button className="up-del-btn">Delete</button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>
