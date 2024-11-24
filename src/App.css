@@ -97,20 +97,20 @@ div.recipes-container {
   text-align: center;
   font-size: 1.5rem; /* Slightly smaller than the homepage title */
   color: #540b0e; /* Theme color */
-  margin-top: 20px;
+  margin-top: 15px;
   margin-bottom: 20px;
   font-weight: bold;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   border-bottom: 2px solid #e6beae; /* Underline effect */
-  padding-bottom: 5px; /* Space between text and underline */
+  padding-bottom: 10px; /* Space between text and underline */
 }
 
 /* Recipe List Styling */
 .recipes-container ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-  gap: 20px; /* Space between cards */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns per row */
+  gap: 20px; /* Add space between cards */
   list-style-type: none; /* Remove bullets */
   padding: 0;
   margin: 0;
@@ -126,8 +126,11 @@ div.recipes-container {
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  width: 100%; /* Ensures the card fills its grid cell */
+  box-sizing: border-box; /* Ensures padding and borders are included in width */
 }
 
+/* Recipe Card Hover Effects */
 .recipes-container ul li:hover {
   transform: translateY(-5px); /* Slight lift on hover */
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* More prominent shadow */
@@ -135,14 +138,14 @@ div.recipes-container {
 
 /* Recipe Card Heading */
 .recipes-container ul li h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem; /* Adjusted for better readability */
   color: #540b0e;
   margin-bottom: 10px;
 }
 
 /* Recipe Card Image */
 .recipes-container ul li img {
-  width: 100%;
+  width: 100%; /* Ensure image takes up full width of the card */
   height: auto; /* Maintain aspect ratio */
   border-radius: 5px;
   margin-bottom: 10px;
@@ -160,3 +163,6 @@ div.recipes-container {
   font-style: italic; /* Differentiate ingredients text */
   color: #540b0e;
 }
+
+
+
