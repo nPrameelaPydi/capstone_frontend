@@ -9,7 +9,16 @@ export default function Recipe({ recipe, onDelete, onEdit }) {
       {/* Display the user's name */}
       <p>Created at: {new Date(recipe.createdAt).toLocaleString()}</p>
       {/* Display the image if it exists */}
-      {recipe.image && <img src={recipe.image} alt={recipe.title} />}
+      {recipe.image && (
+        <img
+          style={{
+            width: "300px",
+            height: "200px",
+          }}
+          src={recipe.image}
+          alt={recipe.title}
+        />
+      )}
       <button onClick={() => onEdit()}>Edit</button> {/* Edit button */}
       <button onClick={() => onDelete(recipe._id)}>Delete Recipe</button>{" "}
       {/* Delete button */}

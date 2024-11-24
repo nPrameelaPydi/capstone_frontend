@@ -38,7 +38,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Welcome to Food & Friends</h1>
+      <h1>Welcome to Food & Friends Hub</h1>
       <SearchBar onSearch={handleSearchResults}></SearchBar>
       <RecipeList
         recipes={recipes}

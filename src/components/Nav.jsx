@@ -56,6 +56,12 @@ export default function Nav({ loggedInUserId }) {
         Register
       </NavLink>
       <NavLink
+        to="/login"
+        className={({ isActive }) => (isActive ? "link active" : "link")}
+      >
+        Login
+      </NavLink>
+      <NavLink
         to="/chats"
         className={({ isActive }) => (isActive ? "link active" : "link")}
       >

@@ -219,6 +219,7 @@ export default function RecipePage() {
           type="file"
           accept="image/*"
           onChange={onInputChangeImage} // Handle image upload
+          style={{ width: "400px", height: "250px" }}
         />
         <button type="submit">
           {editingRecipe ? "Update Recipe" : "Add Recipe"}

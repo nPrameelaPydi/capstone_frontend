@@ -12,7 +12,16 @@ export default function RecipeList({ recipes, onRecipeClick }) {
             {recipes.map((recipe) => (
               <li key={recipe._id} onClick={() => onRecipeClick(recipe._id)}>
                 <h3>{recipe.title}</h3>
-                {recipe.image && <img src={recipe.image} alt={recipe.title} />}
+                {recipe.image && (
+                  <img
+                    style={{
+                      width: "300px",
+                      height: "200px",
+                    }}
+                    src={recipe.image}
+                    alt={recipe.title}
+                  />
+                )}
                 <p>{recipe.ingredients.join(", ")}</p>
                 <p>{recipe.instructions}</p>
               </li>
