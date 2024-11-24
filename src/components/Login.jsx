@@ -61,42 +61,49 @@ const Login = ({ setLoggedInUserId }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} action="">
-        <div>
-          {/* email input */}
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          {/* Password input */}
-          <label htmlFor="">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {/* submit button to trigger login route */}
-        <button type="submit">Login</button>
-        {/* forgot password link */}
-        <div>
-          <p>
-            Forgot your password? <a href="/forgot-password">Reset it here</a>
-          </p>
-        </div>
-      </form>
-      {/* render msg if exists */}
-      {message && <p>{message}</p>}
+    <div className="login-page">
+      <div className="login-container">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit} action="">
+          <div>
+            {/* email input */}
+            <label htmlFor="">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            {/* Password input */}
+            <label htmlFor="">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* submit button to trigger login route */}
+          <button type="submit">Login</button>
+          {/* forgot password link */}
+          <div>
+            <p>
+              Forgot your password?{" "}
+              <a href="/forgot-password" style={{ color: "blue" }}>
+                <br />
+                <br />
+                Reset it here
+              </a>
+            </p>
+          </div>
+        </form>
+        {/* render msg if exists */}
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 };
