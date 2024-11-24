@@ -21,6 +21,18 @@ export default function RecipePage() {
 
   const titleInputRef = useRef(null);
 
+  // Fetch recipes from the backend when the component is first rendered
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/recipes") // Backend API endpoint for fetching recipes
+      .then((response) => {
+        setRecipes(response.data); // Store the fetched recipes in the state
+      })
+      .catch((error) => {
+        console.error("Error fetching recipes:", error); // Log any error that occurs
+      });
+  }, []); // Empty dependency array ensures this runs only once, on mount
+
   // Handle input changes in the form and update the corresponding field in the newRecipe state
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -86,18 +98,6 @@ export default function RecipePage() {
     }
   };
 
-  // Fetch recipes from the backend when the component is first rendered
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/recipes") // Backend API endpoint for fetching recipes
-      .then((response) => {
-        setRecipes(response.data); // Store the fetched recipes in the state
-      })
-      .catch((error) => {
-        console.error("Error fetching recipes:", error); // Log any error that occurs
-      });
-  }, []); // Empty dependency array ensures this runs only once, on mount
-
   // Handle recipe deletion
   const handleDelete = async (id) => {
     try {
@@ -123,32 +123,6 @@ export default function RecipePage() {
     });
     titleInputRef.current.focus();
   };
-
-  //// Handle recipe update via PATCH request
-  //const handleUpdate = async (e) => {
-  //  e.preventDefault();
-  //  try {
-  //    const response = await axios.patch(
-  //      `http://localhost:3000/api/recipes/${editingRecipe._id}`,
-  //      newRecipe
-  //    );
-  //    // Update the recipes state with the updated recipe
-  //    setRecipes((prevRecipes) =>
-  //      prevRecipes.map((recipe) =>
-  //        recipe._id === editingRecipe._id ? response.data : recipe
-  //      )
-  //    );
-  //    setEditingRecipe(null); // Close the edit form
-  //    setNewRecipe({
-  //      title: "",
-  //      ingredients: "",
-  //      instructions: "",
-  //      createdBy: "",
-  //    });
-  //  } catch (error) {
-  //    console.error("Error updating recipe:", error);
-  //  }
-  //};
 
   // Handle recipe update via PATCH request
   const handleUpdate = async (e) => {

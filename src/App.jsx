@@ -7,6 +7,8 @@ import ChatsPage from "./pages/ChatsPage";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import UserProfile from "./pages/UserProfilePage.jsx";
+import SingleRecipePage from "./pages/SingleRecipePage.jsx";
+import "./App.css";
 
 import { useState, useEffect } from "react";
 
@@ -35,6 +37,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/recipes" element={<RecipesPage />}></Route>
+        <Route path="/recipes/:id" element={<SingleRecipePage />} />
         <Route path="/register" element={<Register />}></Route>
         <Route
           path="/login"

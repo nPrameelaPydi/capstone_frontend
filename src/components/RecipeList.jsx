@@ -1,4 +1,4 @@
-export default function RecipeList({ recipes }) {
+export default function RecipeList({ recipes, onRecipeClick }) {
   // Ensure recipes is an array
   //  recipes = Array.isArray(recipes) ? recipes : [];
   return (
@@ -9,7 +9,7 @@ export default function RecipeList({ recipes }) {
       ) : (
         <ul>
           {recipes.map((recipe) => (
-            <li key={recipe._id}>
+            <li key={recipe._id} onClick={() => onRecipeClick(recipe._id)}>
               <h3>{recipe.title}</h3>
               {recipe.image && <img src={recipe.image} alt={recipe.title} />}
               <p>{recipe.ingredients.join(", ")}</p>

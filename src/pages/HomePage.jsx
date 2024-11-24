@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar.jsx";
 import RecipeList from "../components/RecipeList.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   //state to hold list of recipes
   const [recipes, setRecipes] = useState([]);
   //state to handle errors
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   //Fetch all recipes on initialload of Homepage
   useEffect(() => {
@@ -23,6 +26,11 @@ export default function HomePage() {
     fetchAllRecipes();
   }, []);
 
+  //Navigate to detailed view of recipe
+  const handleRecipeClick = (id) => {
+    navigate(`/recipes/${id}`);
+  };
+
   //update the recipes state when search results are received
   const handleSearchResults = (recipeList) => {
     setRecipes(recipeList);
@@ -32,7 +40,10 @@ export default function HomePage() {
     <div>
       <h1>Welcome to Food & Friends</h1>
       <SearchBar onSearch={handleSearchResults}></SearchBar>
-      <RecipeList recipes={recipes}></RecipeList>
+      <RecipeList
+        recipes={recipes}
+        onRecipeClick={handleRecipeClick}
+      ></RecipeList>
       {/* display error msgs if any */}
       {error && <p>{error}</p>}
     </div>
