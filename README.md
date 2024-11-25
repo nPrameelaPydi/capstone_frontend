@@ -53,6 +53,7 @@ The **Food & Friends** is a dynamic, user-friendly React-based web application d
 src/
 ├── components/
 │   ├── Nav.jsx
+├── ├── SearchBar.jsx
 │   ├── Recipe.jsx
 │   ├── Footer.jsx
 ├── pages/
