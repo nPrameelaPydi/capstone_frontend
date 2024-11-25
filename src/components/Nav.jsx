@@ -61,12 +61,12 @@ export default function Nav({ loggedInUserId }) {
       >
         Login
       </NavLink>
-      <NavLink
+      {/*<NavLink
         to="/chats"
         className={({ isActive }) => (isActive ? "link active" : "link")}
       >
         Chats
-      </NavLink>
+      </NavLink>*/}
     </nav>
   );
 }

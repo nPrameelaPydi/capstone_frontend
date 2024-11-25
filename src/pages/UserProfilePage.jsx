@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile({ userId }) {
+  const navigate = useNavigate();
+
   //state hook to store user info
   const [user, setUser] = useState(null);
   //state to store recipes created by user
@@ -20,6 +23,12 @@ export default function UserProfile({ userId }) {
         console.error("Error fetching user Profile", error);
       });
   }, [userId]); //ensures the effect runs only when `userId` changes)
+
+  const handleEdit = (recipeId) => {
+    console.log(`Navigating to /recipe/${recipeId}/edit`);
+    // Navigate to the edit page for the selected recipe
+    navigate(`/recipe/${recipeId}/edit`);
+  };
 
   // Handle recipe deletion
   const handleDelete = async (id) => {
@@ -77,7 +86,12 @@ export default function UserProfile({ userId }) {
                   >
                     Delete
                   </button>
-                  <button className="user-profile-btn">Edit</button>
+                  <button
+                    onClick={() => handleEdit(recipe._id)}
+                    className="user-profile-btn"
+                  >
+                    Edit
+                  </button>
                 </li>
               ))}
             </ul>

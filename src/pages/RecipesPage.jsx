@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Recipe from "../components/Recipe.jsx";
+import { useParams } from "react-router-dom";
 
 export default function RecipePage() {
   // State to hold the list of recipes fetched from the server
@@ -21,6 +22,8 @@ export default function RecipePage() {
 
   const titleInputRef = useRef(null);
 
+  const { recipeId } = useParams(); // Get the recipeId from the URL
+
   // Fetch recipes from the backend when the component is first rendered
   useEffect(() => {
     axios
@@ -32,6 +35,27 @@ export default function RecipePage() {
         console.error("Error fetching recipes:", error); // Log any error that occurs
       });
   }, []); // Empty dependency array ensures this runs only once, on mount
+
+  useEffect(() => {
+    if (recipeId) {
+      // Fetch the recipe by ID when the page loads
+      axios
+        .get(`http://localhost:3000/api/recipes/${recipeId}`)
+        .then((response) => {
+          setEditingRecipe(response.data); // Load recipe into editingRecipe
+          setNewRecipe({
+            title: response.data.title,
+            ingredients: response.data.ingredients,
+            instructions: response.data.instructions,
+            createdBy: response.data.createdBy,
+            image: response.data.image || "",
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching recipe for editing:", error);
+        });
+    }
+  }, [recipeId]); // Runs whenever recipeId changes
 
   // Handle input changes in the form and update the corresponding field in the newRecipe state
   const handleInputChange = (e) => {

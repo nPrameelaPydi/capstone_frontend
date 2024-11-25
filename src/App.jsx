@@ -8,6 +8,7 @@ import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import UserProfile from "./pages/UserProfilePage.jsx";
 import SingleRecipePage from "./pages/SingleRecipePage.jsx";
+import RecipePage from "./pages/RecipesPage.jsx";
 import Footer from "./components/Footer.jsx";
 import "./App.css";
 
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/recipes" element={<RecipesPage />}></Route>
         <Route path="/recipes/:id" element={<SingleRecipePage />} />
+        <Route path="/recipe/:recipeId/edit" element={<RecipePage />} />
         <Route path="/register" element={<Register />}></Route>
         <Route
           path="/login"
@@ -54,7 +56,7 @@ export default function App() {
             )
           }
         />
-        <Route path="/chats" element={<ChatsPage />}></Route>
+        {/*<Route path="/chats" element={<ChatsPage />}></Route>*/}
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
