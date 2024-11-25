@@ -3,12 +3,14 @@ import HomePage from "./pages/HomePage.jsx";
 import NotFound from "./pages/NotfoundPage.jsx";
 import Nav from "./components/Nav.jsx";
 import RecipesPage from "./pages/RecipesPage.jsx";
-import ChatsPage from "./pages/ChatsPage";
+//import ChatsPage from "./pages/ChatsPage";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import UserProfile from "./pages/UserProfilePage.jsx";
 import SingleRecipePage from "./pages/SingleRecipePage.jsx";
 import RecipePage from "./pages/RecipesPage.jsx";
+import CommunityCorner from "./pages/CommunityCornerPage.jsx";
+
 import Footer from "./components/Footer.jsx";
 import "./App.css";
 
@@ -57,6 +59,7 @@ export default function App() {
           }
         />
         {/*<Route path="/chats" element={<ChatsPage />}></Route>*/}
+        <Route path="/community" element={<CommunityCorner />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
       <Footer />

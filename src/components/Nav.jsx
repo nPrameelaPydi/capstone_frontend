@@ -61,6 +61,12 @@ export default function Nav({ loggedInUserId }) {
       >
         Login
       </NavLink>
+      <NavLink
+        to="/community"
+        className={({ isActive }) => (isActive ? "link active" : "link")}
+      >
+        Community Corner
+      </NavLink>
       {/*<NavLink
         to="/chats"
         className={({ isActive }) => (isActive ? "link active" : "link")}
