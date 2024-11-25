@@ -94,7 +94,7 @@ POST /api/recipes/upload-image: Upload an image for a recipe.
 ### **Frontend Development**
 
 1. **Component Design**: Created reusable components like `Nav`, `SearchBar`, `RecipeCard`, and `Footer` to simplify the UI structure.
-2. **Responsive Design**: Ensured mobile-first design with flexibility for different screen sizes.
+2. **Responsive Design**: Ensured design flexibility for different screen sizes.
 3. **Dynamic Data Handling**: Implemented state management to reflect real-time updates in the app, like adding or editing recipes.
 4. **Image Upload Integration**: Integrated image handling with `multipart/form-data` to enable users to upload pictures for their recipes.
 5. **Error Handling**: Added console logging and conditional rendering for a smooth user experience during API failures.

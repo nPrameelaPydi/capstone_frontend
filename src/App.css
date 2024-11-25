@@ -326,8 +326,8 @@ div.recipes-container {
 
 /* Right-Side Image Section */
 .recipe-card .recipe-image {
-  width: 500px; /* Fixed width for the image */
-  height: 300px; /* Fixed height for the image */
+  width: 400px; /* Fixed width for the image */
+  height: 200px; /* Fixed height for the image */
   border-radius: 8px; 
   overflow: hidden; /* Ensures the image stays within bounds */
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
