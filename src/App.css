@@ -259,12 +259,12 @@ div.recipes-container {
 
 /* Cancel Button */
 .recipePageForm button:last-of-type {
-  background-color: #ccc;
+  background-color: #e7cbbc;
   color: black;
 }
 
 .recipePageForm button:last-of-type:hover {
-  background-color: #999;
+  background-color: #c5ebc3;
 }
 
 /* Container for the Recipe List */
@@ -358,12 +358,12 @@ div.recipes-container {
 
 /* Edit Button */
 .recipe-card .recipe-actions .edit-button {
-  background-color: #8f928f; /* Green for Edit */
+  background-color: #a9c5a0; /* Green for Edit */
   color: white;
 }
 
 .recipe-card .recipe-actions .edit-button:hover {
-  background-color: #540b0e; /* Darker green on hover */
+  background-color: #3a3042; /* Darker green on hover */
   transform: scale(1.05); /* Slight grow effect */
 }
 
@@ -383,11 +383,11 @@ div.recipes-container {
 .register-page {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   min-height: 100vh;
   /*background-color: #fdf4f2;*/
   font-family: Arial, sans-serif;
-  margin: 0;
+  padding-top: 5rem;
 }
 .register-container {
   background-color: white;
@@ -399,6 +399,7 @@ div.recipes-container {
   max-width: 500px;
   text-align: center;
   box-sizing: border-box; /* Ensure consistent sizing */
+  margin-top: 0px;
 }
 
 .register-container h2 {
@@ -430,6 +431,10 @@ div.recipes-container {
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+.register-container input[type="password"] {
+  margin-bottom: 1 rem;  
+}
+
 .register-container input:focus {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow effect */
   border-color: #540b0e;
@@ -437,7 +442,7 @@ div.recipes-container {
 
 .register-container button {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   background-color: #540b0e;
   color: white;
   padding: 0.8rem;
@@ -466,10 +471,10 @@ div.recipes-container {
   /*background-color: #fdf4f2;*/
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   min-height: 100vh;
   padding: 20px;
-  padding-top: 0%;
+  padding-top: 6rem;
 }
 
 .login-container {
@@ -481,7 +486,7 @@ div.recipes-container {
   max-width: 400px;
   text-align: center; /* Center-align all content */
   /*margin-top: 0%;*/
-  border: 2px solid #e6beae; 
+  border: 2px solid #e6beae;
 }
 
 .login-container h2 {
@@ -620,9 +625,9 @@ div.recipes-container {
 
 .up-recipe-img {
   width: 100%; /* Ensures the image takes up the full width of the container */
-  height: 200px; /* Set a fixed height for uniformity */
+  height: 200px; 
   object-fit: cover; /* Ensures the image scales and crops to fit the container */
-  border-radius: 8px; /* Optional: adds rounded corners */
+  border-radius: 8px; 
   margin-top: 1rem; /* Adds spacing between the image and text */
   display: block;
 }
@@ -657,7 +662,7 @@ div.recipes-container {
   transform: scale(1.02);
 }
 
-.up-del-btn {
+.user-profile-btn {
   background-color: #e6beae;
   color: #540b0e;
   padding: 10px 20px 10px 20px;
@@ -669,17 +674,60 @@ div.recipes-container {
   color: white;  
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0.2rem;
 }
 
-.up-del-btn:hover {
+.user-profile-btn:hover {
   background-color: #e6beae;
   color: #540b0e;  
 }
 
+/* ******************* */
+/* SingleRecipePage */
+/* Styles for the individual recipe view */
+.single-recipe-page{
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recipe-view {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 0px solid #e6beae;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.recipe-view h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #540b0e;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e6beae;
+  padding-bottom: 10px;
+}
+
+.single-recipe-img {
+  width: 100%; /* Ensures the image takes up the full width of the container */
+  height: 400px; 
+  object-fit: cover; /* Ensures the image scales and crops to fit the container */
+  border-radius: 8px;
+  margin-top: 1rem; /* Adds spacing between the image and text */
+  display: block;
+}
+
+
+
+
 
 .footer {
-  background-color: #283618;
-  color: #fefae0;
+  background-color: #e6beae;
+  color: #3a3042;
   padding: 20px 0;
   text-align: center;
   border-top: 2px solid #dda15e;

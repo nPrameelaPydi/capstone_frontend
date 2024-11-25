@@ -21,6 +21,19 @@ export default function UserProfile({ userId }) {
       });
   }, [userId]); //ensures the effect runs only when `userId` changes)
 
+  // Handle recipe deletion
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/recipes/${id}`); // Backend DELETE route
+      // Update the state to remove the deleted recipe
+      setRecipes((prevRecipes) =>
+        prevRecipes.filter((recipe) => recipe._id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
   // JSX to render the user profile and their recipes
   return (
     <div className="profile-page">
@@ -28,6 +41,7 @@ export default function UserProfile({ userId }) {
       {user && (
         <div className="profile-container">
           <h1>{user.name}'s Profile</h1>
+          <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
           <div className="profile-recipes">
             <h2>My Recipes</h2>
@@ -57,7 +71,13 @@ export default function UserProfile({ userId }) {
                     />
                   )}
                   {/* button to delete recipe */}
-                  <button className="up-del-btn">Delete</button>
+                  <button
+                    className="user-profile-btn"
+                    onClick={() => handleDelete(recipe._id)}
+                  >
+                    Delete
+                  </button>
+                  <button className="user-profile-btn">Edit</button>
                 </li>
               ))}
             </ul>

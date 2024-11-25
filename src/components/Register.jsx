@@ -74,6 +74,7 @@ const Register = () => {
             <label htmlFor="">
               {/* toggle showPassword state */}
               <input
+                style={{ marginTop: "10px" }}
                 type="checkbox"
                 checked={showPassword}
                 onChange={() => setShowPassword(!showPassword)}

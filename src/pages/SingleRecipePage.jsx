@@ -23,18 +23,24 @@ export default function SingleRecipePage() {
   }, [id]); //rerun the effect when id changes
 
   return (
-    <div>
-      {recipeDetails && (
-        <div>
-          <h2>{recipeDetails.title}</h2>
-          <p>{recipeDetails.ingredients}</p>
-          <p>{recipeDetails.instructions}</p>
-          <p>Created by: {recipeDetails.createdBy}</p>
-          {recipeDetails.image && (
-            <img src={recipeDetails.image} alt="Recipe" />
-          )}
-        </div>
-      )}
+    <div className="single-recipe-page">
+      <div className="recipe-view">
+        {recipeDetails && (
+          <div>
+            <h2>{recipeDetails.title}</h2>
+            <p>{recipeDetails.ingredients}</p>
+            <p>{recipeDetails.instructions}</p>
+            <p className="created-by">Created by: {recipeDetails.createdBy}</p>
+            {recipeDetails.image && (
+              <img
+                className="single-recipe-img"
+                src={recipeDetails.image}
+                alt="Recipe"
+              />
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
