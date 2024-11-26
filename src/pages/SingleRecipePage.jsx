@@ -28,9 +28,18 @@ export default function SingleRecipePage() {
         {recipeDetails && (
           <div>
             <h2>{recipeDetails.title}</h2>
-            <p>{recipeDetails.ingredients}</p>
-            <p>{recipeDetails.instructions}</p>
-            <p className="created-by">Created by: {recipeDetails.createdBy}</p>
+            <p>
+              <b>Ingradients: </b>
+              {recipeDetails.ingredients}
+            </p>
+            <p>
+              <b>Instructions: </b>
+              {recipeDetails.instructions}
+            </p>
+            <p className="created-by">
+              <b>Created by: </b>
+              {recipeDetails.createdBy.name}
+            </p>
             {recipeDetails.image && (
               <img
                 className="single-recipe-img"
