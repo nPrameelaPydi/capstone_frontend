@@ -2,6 +2,11 @@
 
 The **Food & Friends** is a dynamic, user-friendly React-based web application designed for sharing and exploring recipes, fostering a vibrant community of food enthusiasts . It allows users to explore, create, and manage recipes. It connects to the backend API to handle authentication, recipe management, and image uploads.
 
+## **Link to Live Site**
+
+[Food & Friends API](#)  
+_(https://remarkable-quokka-7c376a.netlify.app/)_
+
 ## Features
 
 - User authentication (login and registration)
